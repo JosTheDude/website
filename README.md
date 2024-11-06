@@ -3,4 +3,4 @@ My personal portfolio and website's code for public view
 
 If you plan on using this, please credit Dejan
 
-This website uses code from https://dejan.works and is heavily inspired by their website
+This website uses code from https://dejan.works and is heavily inspired by their (previous, not current) website

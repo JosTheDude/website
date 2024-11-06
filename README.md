@@ -1,6 +1,6 @@
-# joscodes.xyz Website & Code
-My personal portfolio and website's code for public view & for GitHub Pages 😅
+# Personal Website ([Visible Here](https://jos.gg/))
+My personal portfolio and website's code for public view
 
-https://joscodes.xyz
+If you plan on using this, please credit Dejan
 
-This website uses code from https://dejan.works and is heavily inspired by his awesome website
+This website uses code from https://dejan.works and is heavily inspired by their (previous, not current) website

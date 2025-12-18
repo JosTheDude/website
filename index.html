@@ -44,7 +44,7 @@
 </head>
 
 <body class="website-background-black">
-
+    <main id="main-content" role="main">
     <div class="hide-mobile mobile-tap-area">
         <div class="max-width">
             <div class="vertical-center">
@@ -89,43 +89,48 @@
         </div>
     </div>
     
-    <!-- Libraries -->
-    <script src="/libs/jquery.js"></script>
-    
-    <!-- Image Hiding -->
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $(".mobile-tap-area").click(function() {
-                $(".toggle-mobile-first").toggle();
-                $(".toggle-mobile-second").toggle();
+    <!-- Image interactions -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileTapArea = document.querySelector('.mobile-tap-area');
+            const toggleMobileFirst = document.querySelectorAll('.toggle-mobile-first');
+            const toggleMobileSecond = document.querySelectorAll('.toggle-mobile-second');
+            const bgPhoto = document.querySelector('.bg-photo');
+            const hoverIndication = document.querySelector('.hover-indication');
+
+            const toggleDisplay = (elements) => {
+                elements.forEach((element) => {
+                    const isHidden = window.getComputedStyle(element).display === 'none';
+                    element.style.display = isHidden ? '' : 'none';
+                });
+            };
+
+            const setVisibility = (shouldHide) => {
+                if (!bgPhoto || !hoverIndication) {
+                    return;
+                }
+                bgPhoto.style.display = shouldHide ? 'none' : '';
+                hoverIndication.style.display = shouldHide ? 'none' : '';
+            };
+
+            if (mobileTapArea) {
+                mobileTapArea.addEventListener('click', () => {
+                    toggleDisplay(toggleMobileFirst);
+                    toggleDisplay(toggleMobileSecond);
+                });
+            }
+
+            setVisibility(window.innerWidth < 768);
+
+            window.addEventListener('resize', () => {
+                setVisibility(window.innerWidth < 728);
             });
         });
     </script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            if (window.innerWidth < 768) {
-                $(".bg-photo").hide();
-                $(".hover-indication").hide();
-            } else {
-                $(".bg-photo").show();
-                $(".hover-indication").show();
-            }
-        });
-    </script>
-    <script type="text/javascript">
-        $(window).resize(function() {
-            if (window.innerWidth < 728) {
-                $(".bg-photo").hide();
-                $(".hover-indication").hide();
-            } else {
-                $(".bg-photo").show();
-                $(".hover-indication").show();
-            }
-        });
-    </script>
     
-    <div class="hover-indication" style="text-align: center;width: 100%;font-family: 'Medium';color: #ffffff;position: fixed;bottom: 4%;font-size: 0.35em;font-size: 3.2vm;font-size: 3.2vmin;animation: bounce 1s infinite alternate;-webkit-animation: bounce .5s cubic-bezier(.5, .6, .6, 1) infinite alternate;-moz-animation: bounce .5s cubic-bezier(.5, .6, .6, 1) infinite alternate;animation: bounce .5s cubic-bezier(.5, .6, .6, 1) infinite alternate;" title="The other words!">Hover anywhere</div>
+    <div class="hover-indication" style="text-align: center;width: 100%;font-family: 'Medium';color: #ffffff;position: fixed;bottom: 4%;font-size: 0.35em;font-size: 3.2vm;font-size: 3.2vmin;animation: bounce 1s infinite alternate;-webkit-animation: bounce .5s cubic-bezier(.5, .6, .6, 1) infinite alternate;-moz-animation: bounce .5s cubic-bezier(.5, .6, .6, 1) infinite alternate;animation: bounce .5s cubic-bezier(.5, .6, .6, 1) infinite alternate;" title="The other words!">Hover over a word</div>
     <div class="bg-photo"></div>
+    </main>
 </body>
 
 </html>

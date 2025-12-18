@@ -1,32 +1,35 @@
-/* var script = document.createElement('script');
-script.src = '../libs/jquery.js';
-document.getElementsByTagName('head')[0].appendChild(script); */
+document.addEventListener('DOMContentLoaded', () => {
+  const mobileTapArea = document.querySelector('.mobile-tap-area');
+  const toggleMobileFirst = document.querySelectorAll('.toggle-mobile-first');
+  const toggleMobileSecond = document.querySelectorAll('.toggle-mobile-second');
+  const bgPhoto = document.querySelector('.bg-photo');
+  const hoverIndication = document.querySelector('.hover-indication');
 
-document.addEventListener('DOMContentLoaded', function () {
-  $(".mobile-tap-area").click(function() {
-    $(".toggle-mobile-first").toggle();
-    $(".toggle-mobile-second").toggle();
+  const toggleDisplay = (elements) => {
+    elements.forEach((element) => {
+      const isHidden = window.getComputedStyle(element).display === 'none';
+      element.style.display = isHidden ? '' : 'none';
+    });
+  };
+
+  const setVisibility = (shouldHide) => {
+    if (!bgPhoto || !hoverIndication) {
+      return;
+    }
+    bgPhoto.style.display = shouldHide ? 'none' : '';
+    hoverIndication.style.display = shouldHide ? 'none' : '';
+  };
+
+  if (mobileTapArea) {
+    mobileTapArea.addEventListener('click', () => {
+      toggleDisplay(toggleMobileFirst);
+      toggleDisplay(toggleMobileSecond);
+    });
+  }
+
+  setVisibility(window.innerWidth < 768);
+
+  window.addEventListener('resize', () => {
+    setVisibility(window.innerWidth < 728);
   });
-}, false);
-
-document.addEventListener('DOMContentLoaded', function () {
-  if (window.innerWidth < 768) {
-    $(".bg-photo").hide();
-    $(".hover-indication").hide();
-  } else {
-    $(".bg-photo").show();
-    $(".hover-indication").show();
-  }
-}, false);
-
-window.addEventListener("resize", resizeEvent);
-
-function resizeEvent() {
-  if (window.innerWidth < 728) {
-    $(".bg-photo").hide();
-    $(".hover-indication").hide();
-  } else {
-    $(".bg-photo").show();
-    $(".hover-indication").show();
-  }
-};
+});
